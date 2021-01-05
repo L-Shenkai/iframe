@@ -14,36 +14,350 @@
 			<div class="col">
 				<h1 style="font-size: 1.60rem; margin-bottom: 1.5rem;">iframe</h1>
 				<form name="user_data">
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<label for="user_age">Age</label>
 						<input type="number" name="user_age" class="form-control" id="user_age" min="1" aria-describedby="user_age" required>
-					</div>
-					<div class="form-group">
+					</div> -->
+					<!-- <div class="form-group">
 						<label for="user_height">Height</label>
 						<input type="number" name="user_height" class="form-control" id="user_height" aria-describedby="user_height" required>
-					</div>
-					<button class="btn btn-lg btn-success float-right" type="submit">Send</button>
+					</div> -->
+					<button class="btn btn-lg btn-success float-right" type="submit">Continue</button>
 				</form>
+				<!-- <form name="upload">
+					<button class="btn btn-lg btn-success float-right" type="submit">upload</button>
+				</form>
+				<form name="myproj">
+					<button class="btn btn-lg btn-success float-right" type="submit">myproj</button>
+				</form>
+				<form name="save">
+					<button class="btn btn-lg btn-success float-right" type="submit">save</button>
+				</form> -->
+				<!-- <p class="status-message">Waiting for data from <code>parent</code>...</p>
+                <div class="user-data alert alert-info" >
+					<p class="user-age"></p>
+					<p class="user-height" style="margin-bottom: 0;"></p>
+				</div> -->
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
+	let readyEvent = {
+		'event':'ready',
+		'Data':[]
+	}
+
+	parent.postMessage(
+				readyEvent,
+				"*");
+		
+        if (window.addEventListener) {
+			window.addEventListener("message", handleMessage);
+		} else {
+			window.attachEvent("onmessage", handleMessage);
+        }
+        
+        function handleMessage(event) {
+			console.log("Received a message from " + event.origin + ".");
+			$(".status-message").text("Data received! This status message will reset in 5 seconds.");
+
+			// If the window that sent this message is not https://crosscommiframe.app, then
+			// that message needs to be thrown out.
+			// if (event.origin != "https://l-shenkai.github.io") {
+			// 	console.log("The message came from some site we don't know. We're not processing it.");
+			// 	alert(event.origin);
+			// 	return;
+			// }
+
+			// When one window sends a message, or data, to another window via
+			// `parent.postMessage()`, the message (the first argument) in the
+			// `parent.postMessage()` call is accessible via `event.data` here.
+			var dataFromChildIframe = event.data;
+
+			// Log the data to the console.
+			console.log(dataFromChildIframe);
+			// alert(dataFromChildIframe);
+
+			// Show that the data was received.
+			$(".status-message").text("Data received! This status message will reset in 5 seconds.");
+			if (dataFromChildIframe.user_age == 1) {
+				$(".user-data .user-age").html("The user is <strong>" + dataFromChildIframe.user_age + "</strong> year old.");
+			} else {
+				$(".user-data .user-age").html("The user is <strong>" + dataFromChildIframe.user_age + "</strong> years old.");
+			}
+			$(".user-data .user-height").html("The user is <strong>" + dataFromChildIframe + "</strong> inches tall.");
+			$(".user-data").slideDown(200, function() {
+				setTimeout(function() {
+					$(".user-data").slideUp(200);
+					$(".status-message").html("Waiting for data from <code>iframe</code>...");
+				}, 5000);
+			});
+		}
+
+		let data = {
+  "event": 1,
+  "Data": {
+    "FieldPaver": [
+      {
+        "productId": 35900,
+        "productName": "SP 1021-4",
+        "patternId": 4,
+        "colorId": 805,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\SP3D\\AngelusBlock\\AntiqueCobble\\CBC()&size=100&extra=(focus=100)",
+        "preferred": 1,
+        "chameleonId": 1938056
+      },
+      {
+        "productId": 35900,
+        "productName": "SP 1021-3",
+        "patternId": 4,
+        "colorId": 830,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\SP3D\\AngelusBlock\\AntiqueCobble\\CTB()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 1938057
+      },
+      {
+        "productId": 35900,
+        "productName": "SP 1021-2",
+        "patternId": 4,
+        "colorId": 1044,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\SP3D\\AngelusBlock\\AntiqueCobble\\GMC()&size=100&extra=(focus=100)",
+        "preferred": 1,
+        "chameleonId": 1938059
+      }
+    ],
+    "BorderPaver": [
+      {
+        "productId": 35900,
+        "productName": "SP 1021-4",
+        "patternId": 4,
+        "colorId": 805,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CBC_Runner()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117386
+      },
+      {
+        "productId": 35900,
+        "productName": "SP 1021-4",
+        "patternId": 4,
+        "colorId": 805,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CBC_Soldier()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117387
+      },
+      {
+        "productId": 35900,
+        "productName": "SP 1021-3",
+        "patternId": 4,
+        "colorId": 830,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CTB_Runner()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117388
+      },
+      {
+        "productId": 35900,
+        "productName": "SP 1021-3",
+        "patternId": 4,
+        "colorId": 830,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CTB_Soldier()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117389
+      }
+    ],
+    "WallFacing": [],
+    "WallCap": [],
+    "StepTread": [],
+    "StepRiser": [],
+    "Turf": []
+  },
+  "Chameleon": {
+    "specifier": "System_Pavers\\\\\\\\Images\\\\\\\\New_Templates\\\\\\\\Exterior_2_All",
+    "sel": "1938059,2117470,2165459,2155138,2212675,139409,1937096,1020469,-1,-1",
+    "image": "https://renderfarm2.chameleonpower.com/proxy/getImage.ashx?type=base&spec=System_Pavers%5C%5CImages%5C%5CNew_Templates%5C%5CExterior_2_All&sel=1938059%2C2117470%2C2165459%2C2155138%2C2212675%2C139409%2C1937096%2C1020469%2C-1%2C-1"
+  }
+}
+
+let data1 = {
+  "event": 1,
+  "Data": {
+    "FieldPaver": [
+      {
+        "productId": 35900,
+        "productName": "SP 1021-4",
+        "patternId": 4,
+        "colorId": 805,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\SP3D\\AngelusBlock\\AntiqueCobble\\CBC()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 1938056
+      },
+      {
+        "productId": 35900,
+        "productName": "SP 1021-3",
+        "patternId": 4,
+        "colorId": 830,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\SP3D\\AngelusBlock\\AntiqueCobble\\CTB()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 1938057
+      },
+      {
+        "productId": 35900,
+        "productName": "SP 1021-2",
+        "patternId": 4,
+        "colorId": 1044,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\SP3D\\AngelusBlock\\AntiqueCobble\\GMC()&size=100&extra=(focus=100)",
+        "preferred": 1,
+        "chameleonId": 1938059
+      }
+    ],
+    "BorderPaver": [
+      {
+        "productId": 35900,
+        "productName": "SP 1021-4",
+        "patternId": 401,
+        "colorId": 805,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CBC_Runner()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117386
+      },
+      {
+        "productId": 35900,
+        "productName": "SP 1021-4",
+        "patternId": 401,
+        "colorId": 805,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CBC_Soldier()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117387
+      },
+      {
+        "productId": 35900,
+        "productName": "SP 1021-3",
+        "patternId": 401,
+        "colorId": 830,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CTB_Runner()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117388
+      },
+      {
+        "productId": 35900,
+        "productName": "SP 1021-3",
+        "patternId": 401,
+        "colorId": 830,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CTB_Soldier()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117389
+      }
+    ],
+    "WallFacing": [
+      {
+        "productId": 54121,
+        "productName": "SP wall facing 1",
+        "patternId": 200,
+        "colorId": 830,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CTB_Soldier()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117389
+      },
+      {
+        "productId": 54130,
+        "productName": "SP wall facing 2",
+        "patternId": 200,
+        "colorId": 830,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CTB_Soldier()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117389
+      }
+    ],
+    "WallCap": [
+      {
+        "productId": 36576,
+        "productName": "SP wall facing 1",
+        "patternId": 200,
+        "colorId": 830,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CTB_Soldier()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117389
+      },
+      {
+        "productId": 36580,
+        "productName": "SP wall facing 2",
+        "patternId": 200,
+        "colorId": 830,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CTB_Soldier()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117389
+      }
+    ],
+    "StepTread": [
+      {
+        "productId": 35476,
+        "productName": "SP t1",
+        "patternId": 200,
+        "colorId": 830,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CTB_Soldier()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117389
+      },
+      {
+        "productId": 39189,
+        "productName": "SP t2",
+        "patternId": 200,
+        "colorId": 830,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CTB_Soldier()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117389
+      }
+    ],
+    "StepRiser": [],
+    "Turf": [
+      {
+        "productId": 51270,
+        "productName": "SP Turf1",
+        "patternId": 200,
+        "colorId": 830,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CTB_Soldier()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117389
+      },
+      {
+        "productId": 47928,
+        "productName": "SP Turf2",
+        "patternId": 200,
+        "colorId": 830,
+        "productImage": "https://core2render.chameleonpower.com/cham/GetImage.ashx?Type=thumb&spec=System_Pavers\\Products\\Borders\\AngelusBlock\\AntiqueCobble\\CTB_Soldier()&size=100&extra=(focus=100)",
+        "preferred": 0,
+        "chameleonId": 2117389
+      }
+    ]
+  },
+  "Chameleon": {
+    "specifier": "System_Pavers\\\\\\\\Images\\\\\\\\New_Templates\\\\\\\\Exterior_2_All",
+    "sel": "1938059,2117470,2165459,2155138,2212675,139409,1937096,1020469,-1,-1",
+    "image": "https://renderfarm2.chameleonpower.com/proxy/getImage.ashx?type=base&spec=System_Pavers%5C%5CImages%5C%5CNew_Templates%5C%5CExterior_2_All&sel=1938059%2C2117470%2C2165459%2C2155138%2C2212675%2C139409%2C1937096%2C1020469%2C-1%2C-1"
+  }
+}
+		let uploadData = {
+			event:2,
+			Data:{}
+		}
+		let myprojData = {
+			event:3,
+			Data:{}
+		}
+		let saveData = {
+			event:4,
+			Data:{}
+		}
+		//
 		// Using the form's submit button, let's submit the form using
 		// JavaScript and jQuery.
 		$("form[name='user_data']").submit(function(e) {
 			// Prevent the form from submitting via its default manner.
 			e.preventDefault();
 			e.stopPropagation();
-
-			// Send the user's age and height to the parent window--sending the
-			// data as an object that the parent can receive and parse.
 			console.log("Sending data to parent");
 			parent.postMessage(
-				{
-					user_age:    $("input[name='user_age']").val(),
-					user_height: $("input[name='user_height']").val(),
-				},
-				"https://l-shenkai.github.io/iframeParent/");
+				data1,
+				"*");
 
 			// The `parent.postMesage()` call allows you to specify "*" as the
 			// second argument--allowing you to send messages to any parent
@@ -72,6 +386,44 @@
 			//	},
 			//	"*");
 		});
+		
+		$("form[name='upload']").submit(function(e) {
+			// Prevent the form from submitting via its default manner.
+			e.preventDefault();
+			e.stopPropagation();
+
+			// Send the user's age and height to the parent window--sending the
+			// data as an object that the parent can receive and parse.
+			console.log("Sending data to parent");
+			parent.postMessage(
+				uploadData,
+				"*");
+		});
+		$("form[name='myproj']").submit(function(e) {
+			// Prevent the form from submitting via its default manner.
+			e.preventDefault();
+			e.stopPropagation();
+
+			// Send the user's age and height to the parent window--sending the
+			// data as an object that the parent can receive and parse.
+			console.log("Sending data to parent");
+			parent.postMessage(
+				myprojData,
+				"*");
+		});
+		$("form[name='save']").submit(function(e) {
+			// Prevent the form from submitting via its default manner.
+			e.preventDefault();
+			e.stopPropagation();
+
+			// Send the user's age and height to the parent window--sending the
+			// data as an object that the parent can receive and parse.
+			console.log("Sending data to parent");
+			parent.postMessage(
+				saveData,
+				"*");
+		});
 	</script>
 </body>
 </html>
+
